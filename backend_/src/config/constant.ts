@@ -1,0 +1,1 @@
+export const API_URL = "http://localhost:8080/vivr/php_data_provider/vivr_data_response.php";
