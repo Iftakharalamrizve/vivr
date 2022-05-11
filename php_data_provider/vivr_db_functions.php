@@ -617,51 +617,51 @@ function throttleFunction($param){
     return ['status'=>$throttleStatus];
 }
 
-function getIVRGeneratedLink ( $param )
+function getIVRGeneratedLink ($dialto,$dialfrom,$lang,$ivrid)
 {
 
     global $g;
+    $plan     = ''; // blank
+    $smsfrom  = ''; // blank
 
-    // $dialto   = $param[ 0 ]; // <CLI>
-    // $plan     = isset( $param[ 1 ] ) ? trim ( $param[ 1 ] ) : ''; // blank
-    // $dialfrom = isset( $param[ 2 ] ) ? trim ( $param[ 2 ] ) : ''; //channel name
-    // $ivrid    = isset( $param[ 3 ] ) ? trim ( $param[ 3 ] ) : ''; //IVR ID
-    // $lang     = isset( $param[ 4 ] ) ? trim ( $param[ 4 ] ) : ''; //Language
-    // $smsfrom  = isset( $param[ 5 ] ) ? trim ( $param[ 5 ] ) : ''; // blank
+    $vivr_settings   = db_select_array ( "SELECT * FROM module_settings as ms left join modules as m ON m.module_id = ms.module_id WHERE m.code='SIVR' " );
+    $domain          = '';
+    $session_timeout = '';
+    foreach ($vivr_settings as $key => $item) {
+        if ( $item->name == 'session_timeout' )
+            $session_timeout = $item->value;
+        elseif ( $item->name == 'sivr_domain' )
+            $domain = $item->value;
+    }
 
-    // $vivr_settings   = db_select_array ( "SELECT * FROM module_settings as ms left join modules as m ON m.module_id = ms.module_id WHERE m.code='SIVR' " );
-    // $domain          = '';
-    // $session_timeout = '';
-    // foreach ($vivr_settings as $key => $item) {
-    //     if ( $item->name == 'session_timeout' )
-    //         $session_timeout = $item->value;
-    //     elseif ( $item->name == 'sivr_domain' )
-    //         $domain = $item->value;
-    // }
+    $token    = substr ( md5 ( 'cPlex-S-IvR' . rand ( 10 , 999999 ) . 'End!' ) , 10 , 12 );
+    $log_time = date ( 'Y-m-d H:i:s' );
+    $exp_time = date ( 'Y-m-d H:i:s' , strtotime ( $log_time ) + $session_timeout );
 
-    // $token    = substr ( md5 ( 'cPlex-S-IvR' . rand ( 10 , 999999 ) . 'End!' ) , 10 , 12 );
-    // $log_time = date ( 'Y-m-d H:i:s' );
-    // $exp_time = date ( 'Y-m-d H:i:s' , strtotime ( $log_time ) + $session_timeout );
+    //generate random string
+    $allowStr        = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $short_link_code = '';
+    for ($i = 0; $i < 6; $i ++) {
+        $short_link_code .= $allowStr[ rand ( 0 , strlen ( $allowStr ) - 1 ) ];
+    }
 
-    // //generate random string
-    // $allowStr        = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    // $short_link_code = '';
-    // for ($i = 0; $i < 6; $i ++) {
-    //     $short_link_code .= $allowStr[ rand ( 0 , strlen ( $allowStr ) - 1 ) ];
-    // }
-    // $flag = db_update ( "INSERT INTO vivr_link SET log_time='$log_time', token='$token', cli='$dialto', did='$dialfrom', plan='$plan', " .
-    //                     "ivr_id='$ivrid', language='$lang', exp_time='$exp_time', short_code='$short_link_code', short_code_exp='$exp_time'" );
+    // $sql = "INSERT INTO vivr_link SET log_time='$log_time', token='$token', cli='$dialto', did='$dialfrom', plan='$plan', " .
+    // "ivr_id='$ivrid', language='$lang', exp_time='$exp_time', short_code='$short_link_code', short_code_exp='$exp_time'";
+    // return $sql;
+    // exit;
+    $flag = db_update ( "INSERT INTO vivr_link SET log_time='$log_time', token='$token', cli='$dialto', did='$dialfrom', plan='$plan', " .
+                        "ivr_id='$ivrid', language='$lang', exp_time='$exp_time', short_code='$short_link_code', short_code_exp='$exp_time'" );
+    
+    $res      = 'F';
+    $new_sivr = '';
+    if ( ctype_digit ( $dialto ) && ! empty( $short_link_code ) && $flag ) {
+        $res      = 'S';
+        $new_sivr = $short_link_code;
+    }
 
-    // $res      = 'F';
-    // $new_sivr = '';
-    // if ( ctype_digit ( $dialto ) && ! empty( $short_link_code ) && $flag ) {
-    //     $res      = 'S';
-    //     $new_sivr = $short_link_code;
-    // }
+    $row             = array();
+    $row[ 'status' ] = $res;
+    $row[ 'url' ]    = $new_sivr;
 
-    // $row             = array();
-    // $row[ 'status' ] = $res;
-    // $row[ 'url' ]    = $new_sivr;
-
-    return [1212121,12121];
+    return $row;
 }

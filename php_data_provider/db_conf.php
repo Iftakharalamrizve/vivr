@@ -3,16 +3,20 @@
 
 //Set source IP for API call
 // $listening_ip = '10.101.92.20';
-$listening_ip = '127.0.0.1';
+//$listening_ip = '127.0.0.1';
+$listening_ip = '192.168.11.53';
 
 global $mysqli;
 global $mysqli_error;
 
 function db_conn($db_suffix = '') {
 global $g, $mysqli;
-$db_host = '127.0.0.1';
-$db_user = 'root';
-$db_pass = 'password';
+//$db_host = '127.0.0.1';
+$db_host = '192.168.11.53';
+//$db_user = 'root';
+$db_user = 'gplex';
+//$db_pass = 'password';
+$db_pass = 'gplex';
 // $db = 'cc';
 $db = 'cc';
 $mysqli = new mysqli("$db_host","$db_user","$db_pass");
