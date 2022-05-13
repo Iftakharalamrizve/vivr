@@ -2,10 +2,11 @@ import DataRequestController from "./DataRequestController";
 
 class DataProviderController extends DataRequestController {
 
-    getUserAuthLinkByCli<T>(data:T): any {
+    getDataProviderInformation<T>(data:T, methodName:string): any {
         this.params = JSON.stringify(data) ;
-        this.method = 'getIVRGeneratedLink';
+        this.method = methodName;
         this.getResponse(true);
+        console.log(this.responseData);
         if(this.responseData){
             return this.responseData;
         }

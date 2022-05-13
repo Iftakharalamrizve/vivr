@@ -3,6 +3,11 @@ export type AuthGenerateRequestType = {
     channel : string;
  }
 
+ export type LoginRequestType = {
+    cli:string,
+    authCode:string
+ }
+
  export type requestDataType = {
     method:string,
     params:any

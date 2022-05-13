@@ -2,6 +2,29 @@ import { body} from 'express-validator';
 
 class authValidator{
 
+    validateLoginRequest() {
+		return [
+			body('cli')
+                .isNumeric()
+                .withMessage('Cli not a valid number')
+                .bail()
+                .isLength({ min: 10, max:10 })
+                .withMessage('Cli lenght must 10 digit')
+                .bail()
+                .notEmpty()
+				.withMessage('Cli is Required'),
+            body('authCode')
+                .isAlphanumeric()
+                .withMessage('Auth Code not a valid number')
+                .bail()
+                .isLength({ min: 8, max:12 })
+                .withMessage('Auth Code lenght Minimum 8 maximum 12')
+                .bail()
+                .notEmpty()
+				.withMessage('Auth Code is Required'),
+		];
+	}
+
     validateChannelRequest() {
 		return [
 			body('cli')

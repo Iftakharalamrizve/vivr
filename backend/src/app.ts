@@ -4,8 +4,8 @@ import helmet from 'helmet';
 import xss from "xss";
 import hpp from "hpp";
 import cors from "cors";
-import todoRouter from "./todo/route/todoRouter";
-import authRouter from "./user/route/authRoute";
+// import todoRouter from "./todo/route/todoRouter";
+import authRouter from "./routes/authRoute";
 
 const app = express();
 
@@ -39,7 +39,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-app.use("/api/v1", todoRouter);
+// app.use("/api/v1", todoRouter);
 app.use("/api/v1", authRouter);
 
 export default app;
