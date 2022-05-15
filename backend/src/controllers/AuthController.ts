@@ -34,7 +34,7 @@ class AuthController {
     res.status(401).json(responseNotFound({message:'Unauthorized. User Not Found.',statusCode:res.statusCode}));
   }
 
-  generateTokenData (request : Request<LoginRequestType> , data:object , source : string , response:Response){
+  generateTokenData (request : Request<LoginRequestType> , data:any , source : string , response:Response){
 
 
   }
