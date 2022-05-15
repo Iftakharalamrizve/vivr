@@ -7,7 +7,7 @@ class DataLoggerService extends DataRequestService {
     
     public createCustomerLogData(userData:any,ip:string,source:string,isRegistered:boolean):boolean
     {
-        const now:Date = new Date();
+        const now : Date = new Date();
         let logTime = date.format(now, 'Y-m-d H:i:s');
         let cli:string = userData.cli;
         let customerJourneyData = [cli,VIVR_MODULE_TYPE,VIVR_ONLY_MODULE_SUBTYPE,logTime,userData.session_id];

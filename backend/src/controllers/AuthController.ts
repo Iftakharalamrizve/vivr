@@ -1,29 +1,14 @@
 import { Request, response, Response } from "express";
-import jwt from "jsonwebtoken";
 import { AuthGenerateRequestType , LoginRequestType} from "@/types";
 import DataProviderService from "@/services/DataProviderService";
 import {responseSuccess,responseNotFound,error} from '../utils/responseApi';
 import { GET_LOGIN_GENERATE_CODE, GET_USER_FROM_AUTH_CODE_FUNCTION, IVR_SOURCE } from "@/config/constant";
 
 class AuthController {
-  #SecretKey = process.env.JWT_SECRET as string;
-
-  async createJsonWebToken(id: number | string) {
-    return jwt.sign(
-      {
-        id,
-      },
-      this.#SecretKey,
-      {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      }
-    );
-  }
-
   /**
- * @todo Create Token System.
- * @todo Implement this function.
- */
+  * @todo Create Token System.
+  * @todo Implement this function.
+  */
 
   async loginWithAuthCode(req: Request<LoginRequestType>, res: Response) {
     let [cli, authCode] = [req.body.cli, req.body.authCode];
