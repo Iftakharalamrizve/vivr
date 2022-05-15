@@ -36,6 +36,7 @@ class AuthController {
 
   generateTokenData (request : Request<LoginRequestType> , data:any , source : string , response:Response){
 
+    
 
   }
 
