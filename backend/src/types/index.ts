@@ -20,3 +20,21 @@ export type AuthGenerateRequestType = {
     lan : string;
  }
 
+ export interface LoginResponseType {
+   log_time: string;
+   token: string;
+   cli: string;
+   did?: string | number;
+   plan?: string | null;
+   ivr_id?: string;
+   language?:string;
+   exp_time:string;
+   status:string;
+   short_code:string;
+   short_code_exp:string;
+   ip?:string;
+   req_time?:string;
+   short_lnk_status?:string;
+   session_id?:string|number
+ }
+

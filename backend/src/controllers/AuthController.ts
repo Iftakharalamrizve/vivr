@@ -1,39 +1,39 @@
 import { Request, response, Response } from "express";
-import { AuthGenerateRequestType , LoginRequestType} from "@/types";
+import date from 'date-and-time';
+import { AuthGenerateRequestType, LoginRequestType, LoginResponseType } from "@/types";
 import DataProviderService from "@/services/DataProviderService";
-import {responseSuccess,responseNotFound,error} from '../utils/responseApi';
+import DataLoggerService from "@/services/DataLoggerService";
+import { responseSuccess, responseNotFound, error } from '../utils/responseApi';
 import { GET_LOGIN_GENERATE_CODE, GET_USER_FROM_AUTH_CODE_FUNCTION, IVR_SOURCE } from "@/config/constant";
 
 class AuthController {
-  /**
-  * @todo Create Token System.
-  * @todo Implement this function.
-  */
+  
 
   async loginWithAuthCode(req: Request<LoginRequestType>, res: Response) {
     let [cli, authCode] = [req.body.cli, req.body.authCode];
-    let data = DataProviderService.getDataProviderInformation([cli,authCode],GET_USER_FROM_AUTH_CODE_FUNCTION);
+    let data: LoginResponseType = DataProviderService.getDataProviderInformation([cli, authCode], GET_USER_FROM_AUTH_CODE_FUNCTION);
     if (data) {
-      return this.generateTokenData(req,data,IVR_SOURCE,res);
+      return this.generateTokenData(req, data, IVR_SOURCE, res);
     }
-    res.status(401).json(responseNotFound({message:'Unauthorized. User Not Found.',statusCode:res.statusCode}));
+    res.status(401).json(responseNotFound({ message: 'Unauthorized. User Not Found.', statusCode: res.statusCode }));
   }
 
-  generateTokenData (request : Request<LoginRequestType> , data:any , source : string , response:Response){
-
+  generateTokenData(request: Request<LoginRequestType>, userData: LoginResponseType, source: string, response: Response) {
     
-
+    const cli = userData.cli.slice(-10);
+    userData.session_id  = cli + new Date().getTime();
+    const isLogged = DataLoggerService.createCustomerLogData(userData,'',source,true);
   }
 
   async generateAuthLink(req: Request<AuthGenerateRequestType>, res: Response) {
     let [cli, channel] = [req.body.cli, req.body.channel];
-    let data = DataProviderService.getDataProviderInformation([cli,channel,"EN","AE"],GET_LOGIN_GENERATE_CODE);
+    let data = DataProviderService.getDataProviderInformation([cli, channel, "EN", "AE"], GET_LOGIN_GENERATE_CODE);
     if (data) {
       //success code generator response generate
-      res.status(200).json(responseSuccess({message:'Auth Link Generated',statusCode:res.statusCode,data}));
+      res.status(200).json(responseSuccess({ message: 'Auth Link Generated', statusCode: res.statusCode, data }));
     }
     // failed link generate response generate
-    res.status(400).json(responseNotFound({message:'Auth Link Not Generated',statusCode:res.statusCode}));
+    res.status(400).json(responseNotFound({ message: 'Auth Link Not Generated', statusCode: res.statusCode }));
   }
 }
 

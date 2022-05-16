@@ -35,3 +35,5 @@ class DataLoggerService extends DataRequestService {
 
     
 }
+
+export default new DataLoggerService();
