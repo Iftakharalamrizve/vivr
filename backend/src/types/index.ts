@@ -35,6 +35,10 @@ export type AuthGenerateRequestType = {
    ip?:string;
    req_time?:string;
    short_lnk_status?:string;
-   session_id?:string|number
+   session_id?:string|number;
+   // iss?:string;
+   // aud?:string;
+   // iat?:string|number;
+   // nbf?:string|number;
  }
 

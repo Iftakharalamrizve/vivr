@@ -1,11 +1,12 @@
 
 import { STORE_CUSTOMER_JOURNEY_FUNCTION, VIVR_LOG_FUNCTION, VIVR_MODULE_TYPE, VIVR_ONLY_MODULE_SUBTYPE } from '@/config/constant';
+import { LoginResponseType } from '@/types';
 import date from 'date-and-time';
 import DataRequestService from './DataRequestService';
 
 class DataLoggerService extends DataRequestService {
     
-    public createCustomerLogData(userData:any,ip:string,source:string,isRegistered:boolean):boolean
+    public createCustomerLogData(userData:LoginResponseType,ip:string,source:string,isRegistered:boolean):boolean
     {
         const now : Date = new Date();
         let logTime = date.format(now, 'Y-m-d H:i:s');
