@@ -7,7 +7,7 @@ dotenv.config({
 });
 
 db.sync().then(() => {
-	console.log("connect to db");
+	console.log("connect to the db");
 });
 
 const port = 9000;
