@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from "@/config/constant";
+import { API_URL } from "../config/constant";
 import { requestDataType  } from "@/types";
 
 class DataRequestService {

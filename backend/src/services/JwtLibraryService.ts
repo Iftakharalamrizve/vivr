@@ -1,4 +1,4 @@
-import { LOG_LOCATION, VIVR_TOKEN_ISSUER } from "@/config/constant";
+import { LOG_LOCATION, VIVR_TOKEN_ISSUER } from "../config/constant";
 import { LoginResponseType } from "@/types";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";

@@ -1,5 +1,5 @@
 
-import { STORE_CUSTOMER_JOURNEY_FUNCTION, VIVR_LOG_FUNCTION, VIVR_MODULE_TYPE, VIVR_ONLY_MODULE_SUBTYPE } from '@/config/constant';
+import { STORE_CUSTOMER_JOURNEY_FUNCTION, VIVR_LOG_FUNCTION, VIVR_MODULE_TYPE, VIVR_ONLY_MODULE_SUBTYPE } from '../config/constant';
 import { LoginResponseType } from '@/types';
 import date from 'date-and-time';
 import DataRequestService from './DataRequestService';

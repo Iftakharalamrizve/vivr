@@ -1,11 +1,11 @@
 import { Request, response, Response } from "express";
 import date from 'date-and-time';
 import { AuthGenerateRequestType, LoginRequestType, LoginResponseType } from "@/types";
-import DataProviderService from "@/services/DataProviderService";
-import DataLoggerService from "@/services/DataLoggerService";
-import JwtLibraryService from '@/services/JwtLibraryService'
+import DataProviderService from "../services/DataProviderService";
+import DataLoggerService from "../services/DataLoggerService";
+import JwtLibraryService from '../services/JwtLibraryService'
 import { responseSuccess, responseNotFound, error } from '../utils/responseApi';
-import { GET_LOGIN_GENERATE_CODE, GET_USER_FROM_AUTH_CODE_FUNCTION, IVR_SOURCE } from "@/config/constant";
+import { GET_LOGIN_GENERATE_CODE, GET_USER_FROM_AUTH_CODE_FUNCTION, IVR_SOURCE } from "../config/constant";
 
 class AuthController {
   #token : string = '';
