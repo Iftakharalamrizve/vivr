@@ -23,6 +23,8 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+import client from './config/redis.js';
+app.set('redisClient', client);
 // Parse the x-www-form-urlencoded request body.
 app.use(express.urlencoded({ extended: true }));
 

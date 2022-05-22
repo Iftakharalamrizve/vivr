@@ -1,6 +1,7 @@
 import DataRequestService from "./DataRequestService";
 
 class DataProviderService extends DataRequestService {
+    
     getDataProviderInformation<T>(data:T, methodName:string): any {
         this.params = JSON.stringify(data) ;
         this.method = methodName;
