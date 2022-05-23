@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: sivr-nginx
+    restart: unless-stopped
+    ports:
+      -80:80
+      -443:443
+    volumes:
+      -./:/var/www/html:cached
+      -./docker/nginx:/etc/nginx/conf.d
+      -./docker/nginx/ssl:/etc/nginx/conf.d/ssl
+    depends_on:
+    networks:
+      - sivr-network
+networks:
+  sivr-network:
+    driver: bridge
+volumes:
+  sivr-volumes:
+    driver: local
