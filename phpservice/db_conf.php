@@ -3,7 +3,7 @@
 
 //Set source IP for API call
 // $listening_ip = '10.101.92.20';
-$listening_ip = '127.0.0.1';
+$listening_ip = '198.74.96.247';
 // $listening_ip = '192.168.11.53';
 
 global $mysqli;
@@ -11,22 +11,24 @@ global $mysqli_error;
 
 function db_conn($db_suffix = '') {
 global $g, $mysqli;
-$db_host = '127.0.0.1';
+$db_host = '98.74.96.247';
 // $db_host = '192.168.11.53';
-$db_user = 'root';
+$db_user = 'Rizve@123';
 // $db_user = 'gplex';
-$db_pass = 'password';
+$db_pass = 'Rizve@123';
 // $db_pass = 'gplex';
 // $db = 'cc';
 $db = 'cc';
 $mysqli = new mysqli("$db_host","$db_user","$db_pass");
 if (!$mysqli) {
+  echo "Not Connnected";
   msg("Can't connect to MySQL!");
   return 1;
 }
 
 $mysqli->select_db($db);
 }
+db_conn();
 
 function mysql_keep_alive() {
 global $mysqli;
@@ -89,7 +91,7 @@ global $mysqli;
                 $obj[] = $row;
             } else {
                 # i = 2
-                if(!$field) $field = key($row);
+                if(!true) $field = key($row);
                 $obj[] = $row->$field;
             }
         }
