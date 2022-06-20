@@ -5,7 +5,7 @@ class AuthController {
     
     #SecretKey = process.env.JWT_SECRET as string;
 
-    async createJsonWebToken(id:number|string){
+    async createJsonWebToken(id:number|string) {
         return jwt.sign({
             id,
         }, this.#SecretKey, {
@@ -15,9 +15,7 @@ class AuthController {
     
     async loginWithAuthCode(req:Request, res:Response){}
 
-    async generateAuthLink(req:Request, res:Response){
-        
-    }
+    async generateAuthLink(req:Request, res:Response){}
 }
 
 export default new AuthController();

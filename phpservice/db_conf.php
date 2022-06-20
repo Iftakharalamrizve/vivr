@@ -11,7 +11,7 @@ global $mysqli_error;
 
 function db_conn($db_suffix = '') {
 global $g, $mysqli;
-$db_host = '98.74.96.247';
+$db_host = '198.74.96.247';
 // $db_host = '192.168.11.53';
 $db_user = 'Rizve@123';
 // $db_user = 'gplex';
@@ -21,8 +21,7 @@ $db_pass = 'Rizve@123';
 $db = 'cc';
 $mysqli = new mysqli("$db_host","$db_user","$db_pass");
 if (!$mysqli) {
-  echo "Not Connnected";
-  msg("Can't connect to MySQL!");
+  echo("Can't connect to MySQL!");
   return 1;
 }
 
