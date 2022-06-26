@@ -12,6 +12,7 @@ services:
       - sivr-network
     depends_on:
       - php
+      - cache
 
   php:
     container_name: sivr-php
@@ -22,6 +23,14 @@ services:
       - .:/var/www/html
     depends_on:
       - sivr_db
+    networks:
+      - sivr-network
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     networks:
       - sivr-network
 
