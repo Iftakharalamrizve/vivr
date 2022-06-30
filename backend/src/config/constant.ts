@@ -27,7 +27,7 @@ export const VIVR_TOKEN_ISSUER = "vivr.web" ;
  export const UPDATE_VIVR_LOG =  "updateVivrLog";
  export const LOG_VIVR_JOURNEY =  "logVivrJourney";
  export const GET_BULLETIN_MSG =  "getBulletinMessage";
- export const GET_DYNAMIC_PAGE_DATA =  "getDynamicPageData";
+ export const GET_DYNAMIC_PAGE_DATA = "getDynamicPageData";
  export const SET_LOGOUT_TYPE =  "setLogoutType";
 
  export const PIN_SMS_TEXT =  "Your Smart IVR Login PIN is : ";
