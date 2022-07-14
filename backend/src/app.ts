@@ -6,7 +6,8 @@ import hpp from "hpp";
 import cors from "cors";
 // import todoRouter from "./todo/route/todoRouter";
 import authRouter from "./routes/authRoute";
-
+import {db,client} from "./config/database.config"
+ 
 const app = express();
 
 // Allow Cross-Origin requests
@@ -38,6 +39,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+//set redis server in application  
+app.set('redisClient', client);
+//call redis client 
+client;
 
 // app.use("/api/v1", todoRouter);
 app.use("/api/v1", authRouter);
