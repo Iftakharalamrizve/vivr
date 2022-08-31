@@ -2,20 +2,25 @@
 
 FROM node:16.16-alpine
 
+ARG NODE_ENV=development
+
 #Create App Directory
-RUN mkdir -p /var/www/html
-WORKDIR /var/www/html/backend
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 #install Dependecies 
 COPY ./backend/package*.json ./
+COPY ./backend/tsconfig*.json ./
 
-RUN npm install -g npm@8.14.0
+RUN npm install  ts-node nodemon
+RUN npm install
+RUN npm install typescript
 RUN npm update
 
 #Copy app source code 
 COPY ./backend/ .
 
 #Exports 
-EXPOSE 9000 
+EXPOSE 8081
 
-CMD ["npm","dev"]
+CMD ["npm","start"]

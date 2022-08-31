@@ -40,9 +40,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //set redis server in application  
-app.set('redisClient', client);
-//call redis client 
-client;
+// app.set('redisClient', client);
+// //call redis client 
+// client;
 
 // app.use("/api/v1", todoRouter);
 app.use("/api/v1", authRouter);

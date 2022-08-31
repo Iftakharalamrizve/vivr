@@ -1,4 +1,4 @@
-import db from "./config/database.config";
+import {db} from "./config/database.config";
 import app from "./app";
 
 import dotenv from 'dotenv';
@@ -10,7 +10,7 @@ db.sync().then(() => {
 	console.log("connect to the db");
 });
 
-const port = 9000;
+const port = 8081;
 
 app.listen(port, () => {
 	console.log("server is running on port " + port);

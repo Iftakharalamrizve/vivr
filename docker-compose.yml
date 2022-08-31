@@ -1,54 +1,28 @@
+version: '3.7'
+
 services:
-  
-  #nginx
-  sivr-web-server:
-    container_name: sivr-web
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
-    ports:
-      - "8080:80"
-    # volumes:
-    #   - .:/var/www/html/backend
-    networks:
-      - sivr-network
-    depends_on:
-      - php
-  
-  #php
-  sivr-php-service:
-    container_name: sivr-php
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    volumes:
-      - .:/var/www/html
-    networks:
-      - sivr-network
-
-
-  #node
-  sivr-node-service:
-    container_name: node-service
+  backend-server:
     build:
       context: .
       dockerfile: docker/node/Dockerfile
+    image: node-server
+    container_name: sivr-node-server
+    volumes:
+    - ./backend/:/usr/src/app
+    - /usr/src/app/node_modules
     ports:
-      - "9000:9000"
-
-  
-  #redis
-  sivr-redis-cache:
-    image: redis:6.2-alpine
-    restart: always
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - "8081:8081"
+    env_file: ./backend/.env
+    environment:
+      - NODE_ENV=development
     networks:
       - sivr-network
-
   
-
 networks:
-  sivr-network:
-    driver: bridge
+    sivr-network:
+        driver: bridge
+
+volumes:
+    node_modules:
+    web-root:
+      driver: local
