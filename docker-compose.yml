@@ -1,15 +1,16 @@
 version: '3.7'
-
 services:
   backend-server:
     build:
-      context: .
-      dockerfile: docker/node/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     image: node-server
     container_name: sivr-node-server
+    # command: npm run start
+    restart: always
     volumes:
-    - ./backend/:/usr/src/app
-    - /usr/src/app/node_modules
+      - ./backend/:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - "8081:8081"
     env_file: ./backend/.env
@@ -21,8 +22,8 @@ services:
 networks:
     sivr-network:
         driver: bridge
-
 volumes:
+    data-volume:
     node_modules:
     web-root:
       driver: local

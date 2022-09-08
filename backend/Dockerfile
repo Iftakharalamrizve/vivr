@@ -9,16 +9,14 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 #install Dependecies 
-COPY ./backend/package*.json ./
-COPY ./backend/tsconfig*.json ./
+COPY package*.json ./
+COPY tsconfig*.json ./
+COPY . .
 
 RUN npm install  ts-node nodemon
 RUN npm install
 RUN npm install typescript
 RUN npm update
-
-#Copy app source code 
-COPY ./backend/ .
 
 #Exports 
 EXPOSE 8081

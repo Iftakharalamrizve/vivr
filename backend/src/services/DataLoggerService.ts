@@ -21,7 +21,8 @@ class DataLoggerService extends DataRequestService {
         return false;
     }
 
-    getDataProviderInformation<T>(data:T, methodName:string): boolean {
+    getDataProviderInformation<T>(data:T, methodName:string): boolean 
+    {
         this.params = JSON.stringify(data) ;
         this.method = methodName;
         this.getResponse(true);

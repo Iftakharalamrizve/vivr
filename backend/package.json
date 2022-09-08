@@ -2,10 +2,10 @@
 	"name": "crud-ts",
 	"version": "1.0.0",
 	"description": "SIVR Servie Template",
-	"main": "dist/index.js",
+	"main": "dist/server.js",
 	"scripts": {
 		"build": "tsc",
-		"start": "ts-node src/server.ts",
+		"start": "tsc && nodemon dist/server.js",
 		"test": "jest --detectOpenHandles",
 		"fmt": "prettier --config .prettierrc 'src/**/*.ts' --write",
 		"lint": "yarn run eslint --ext .ts src/"
@@ -24,7 +24,8 @@
 		"ts-jest": "^27.0.4",
 		"ts-node-dev": "^1.1.8",
 		"tsconfig-paths": "^4.1.0",
-		"typescript": "^4.2.4"
+		"typescript": "^4.2.4",
+		"webpack": "^5.74.0"
 	},
 	"dependencies": {
 		"@types/bcrypt": "^5.0.0",
@@ -46,6 +47,7 @@
 		"redis": "^4.1.0",
 		"sequelize": "^6.6.2",
 		"sqlite3": "^5.0.2",
+		"ts-node": "^10.9.1",
 		"util": "^0.12.4",
 		"uuid": "^8.3.2",
 		"xss": "^1.0.11",
