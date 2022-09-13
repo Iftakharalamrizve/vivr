@@ -1,15 +1,39 @@
 version: '3.7'
 services:
+
+#nginx server
+  sivr-nginx-server:
+    container_name: sivr-nginx-web-server
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./phpservice:/var/www/html/phpservice
+    networks:
+      - sivr-network
+    depends_on:
+      - sivr-php-service
+
+  sivr-php-service:
+    container_name: sivr-php-service-container
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    networks:
+      - sivr-network
+    
   backend-server:
     build:
       context: ./backend
       dockerfile: Dockerfile
     image: node-server
     container_name: sivr-node-server
-    command: npm run start
+    command: npm run dev
     restart: always
     volumes:
-      - ./backend/:/usr/src/app
+      - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - "8081:8081"
@@ -18,6 +42,11 @@ services:
       - NODE_ENV=development
     networks:
       - sivr-network
+
+  
+  
+
+
 networks:
     sivr-network:
         driver: bridge

@@ -20,11 +20,10 @@ COPY tsconfig*.json ./
 COPY . .
 
 RUN npm install && npm rebuild bcrypt --build-from-source && npm cache clean --force 
-
 RUN npm install typescript
 RUN npm update
 
 #Exports 
 EXPOSE 8081
 
-CMD ["npm","start"]
+CMD ["npm","dev"]

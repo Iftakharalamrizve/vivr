@@ -10,6 +10,8 @@ db.sync().then(() => {
 	console.log("connect to the db");
 });
 
+console.log("test server");
+
 const port = 8081;
 
 app.listen(port, () => {
