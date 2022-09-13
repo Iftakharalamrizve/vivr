@@ -94,7 +94,7 @@
 // 	});
 // });
 describe("test create route", () => {
-	test("Should handle exception", async () => {
+	test("Should handle excepdtion", async () => {
         console.log("Hello Bangaldesh")
     })
 });
