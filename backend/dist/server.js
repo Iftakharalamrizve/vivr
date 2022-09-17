@@ -12,7 +12,6 @@ dotenv_1.default.config({
 database_config_1.db.sync().then(() => {
     console.log("connect to the db");
 });
-console.log("test server");
 const port = 8081;
 app_1.default.listen(port, () => {
     console.log("server is running on port " + port);

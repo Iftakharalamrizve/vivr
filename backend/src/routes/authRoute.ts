@@ -5,6 +5,10 @@ import Middleware from '../middleware';
 import AuthController from '../controllers/AuthController';
 
 const router = express.Router();
+router.get('/test',function(req,res){
+    res.status(200).json("test Bangladesh");
+
+})
 router.post(
     '/login/auth',
     AuthValidator.validateLoginRequest(),

@@ -1,4 +1,3 @@
-
 #Dockerfile for Node and express project
 
 FROM node:16.16-alpine
@@ -19,7 +18,7 @@ COPY package*.json ./
 COPY tsconfig*.json ./
 COPY . .
 
-RUN npm install && npm rebuild bcrypt --build-from-source && npm cache clean --force 
+RUN npm install --production && npm rebuild bcrypt --build-from-source && npm cache clean --force 
 RUN npm install typescript
 RUN npm update
 
