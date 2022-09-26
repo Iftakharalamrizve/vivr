@@ -16,20 +16,21 @@ class DataRequestService {
     }
 
     async dataRequest(postData: requestDataType): Promise<void> {
+        console.log(postData);
         let options = {
-        method: "POST",
-        url: API_URL,
-        headers: {
-            "Content-Type": "application/json",
-        },
-        data: postData,
+          method: "POST",
+          url: API_URL,
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+          data: postData,
         };
 
         try {
-        const response = await axios(options);
-        this.responseData = response.data;
+          const response = await axios(options);
+          this.responseData = response.data;
         } catch (error) {
-        this.responseData = null ;
+          this.responseData = null;
         }
     }
 }

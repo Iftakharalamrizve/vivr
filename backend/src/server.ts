@@ -7,10 +7,8 @@ dotenv.config({
 });
 
 db.sync().then(() => {
-	console.log("connect to the db");
+	console.log("connect to the Sqlize Database");
 });
-
-console.log("test server");
 
 const port = 8081;
 
