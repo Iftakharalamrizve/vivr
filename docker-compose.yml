@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  #backend node server
+  # Backend node server
   backend-server:
     build:
       context: ./backend
@@ -19,9 +19,10 @@ services:
       - NODE_ENV=development
     networks:
       - sivr-network
-    
-  #nginx Server 
+
+  # Nginx Server 
   nginx:
+    container_name: nginx-server
     build:
       context: ./docker/nginx
     volumes:
@@ -36,8 +37,9 @@ services:
     networks:
       - sivr-network
 
-  #php FPM service 
+  # PHP FPM service 
   php-fpm:
+    container_name: php-fpm-service
     build:
       context: ./docker/php-fpm
     restart: always
@@ -46,15 +48,35 @@ services:
       - ./docker/php-fpm/conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./docker/php-fpm/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./docker/php-fpm/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+    depends_on:
+      - mysql
     networks:
       - sivr-network
 
+  # Mysql service 
+  mysql:
+    container_name: mysql-service
+    build:
+      context: ./docker/database
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./docker/database/data:/var/lib/mysql
+      - ./docker/database/cc.sql:/docker-entrypoint-initdb.d/cc.sql
+    networks:
+      - sivr-network
 
 networks:
-    sivr-network:
-        driver: bridge
+  sivr-network:
+    driver: bridge
 volumes:
-    data-volume:
-    node_modules:
-    web-root:
-      driver: local
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local

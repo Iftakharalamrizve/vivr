@@ -10,7 +10,8 @@ $debug = 0;
 
 $RequestData = json_decode(file_get_contents("php://input"),true);
 // $RequestData = $_REQUEST;
-
+die(json_encode([1,2,3,4]));
+exit;
 
 
 include('db_conf.php');

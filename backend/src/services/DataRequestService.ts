@@ -7,29 +7,31 @@ class DataRequestService {
     protected params: any;
     protected method: string = "";
 
-    protected getResponse(isArray: boolean = false):void {
+    protected async getResponse(isArray: boolean = false):Promise<any> {
         const requestData: requestDataType = {
-        method: this.method,
-        params: this.params,
+            method: this.method,
+            params: this.params,
         };
-        this.dataRequest(requestData);
+        await this.dataRequest(requestData);
     }
 
     async dataRequest(postData: requestDataType): Promise<void> {
         let options = {
-        method: "POST",
-        url: API_URL,
-        headers: {
-            "Content-Type": "application/json",
-        },
-        data: postData,
+            method: "POST",
+            url: API_URL,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: postData,
         };
 
         try {
-        const response = await axios(options);
-        this.responseData = response.data;
+            const response = await axios(options);
+            this.responseData = response.data;
+            console.log(this.responseData)
         } catch (error) {
-        this.responseData = null ;
+            console.log(error.message)
+            this.responseData = null ;
         }
     }
 }

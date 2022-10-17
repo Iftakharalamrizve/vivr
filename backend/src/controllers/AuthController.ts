@@ -28,8 +28,8 @@ class AuthController {
       );
     if (data) {
       return this.generateTokenData(req, data, IVR_SOURCE, res);
-    }
-    res
+    }else{
+      res
       .status(401)
       .json(
         responseNotFound({
@@ -37,6 +37,8 @@ class AuthController {
           statusCode: res.statusCode,
         })
       );
+    }
+    
   }
 
   async generateTokenData(
@@ -69,7 +71,7 @@ class AuthController {
 
   async generateAuthLink(req: Request<AuthGenerateRequestType>, res: Response) {
     let [cli, channel] = [req.body.cli, req.body.channel];
-    let data = DataProviderService.getDataProviderInformation(
+    let data = await DataProviderService.getDataProviderInformation(
       [cli, channel, "EN", "AE"],
       GET_LOGIN_GENERATE_CODE
     );
@@ -84,9 +86,8 @@ class AuthController {
             data,
           })
         );
-    }
-    // failed link generate response generate
-    res
+    }else{
+      res
       .status(400)
       .json(
         responseNotFound({
@@ -94,6 +95,8 @@ class AuthController {
           statusCode: res.statusCode,
         })
       );
+    }
+    
   }
 }
 

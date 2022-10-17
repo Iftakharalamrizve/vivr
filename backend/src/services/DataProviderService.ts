@@ -1,11 +1,11 @@
+import { LoginRequestType } from "@/types";
 import DataRequestService from "./DataRequestService";
 
 class DataProviderService extends DataRequestService {
-    getDataProviderInformation<T>(data:T, methodName:string): any {
+    async  getDataProviderInformation<T>(data:T, methodName:string): Promise<LoginRequestType> {
         this.params = JSON.stringify(data) ;
         this.method = methodName;
-        this.getResponse(true);
-        console.log(this.responseData);
+        await this.getResponse(true);
         if(this.responseData){
             return this.responseData;
         }
