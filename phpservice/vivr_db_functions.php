@@ -661,6 +661,7 @@ function getIVRGeneratedLink ($dialto,$dialfrom,$lang,$ivrid)
 
     $row             = array();
     $row[ 'status' ] = $res;
+    $row[ 'token' ] = $token;
     $row[ 'url' ]    = $new_sivr;
 
     return $row;

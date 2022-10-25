@@ -20,30 +20,34 @@ class AuthController {
   private cacheKey: any;
 
   async loginWithAuthCode(req: Request<LoginRequestType>, res: Response) {
-    let [cli, authCode] = [req.body.cli, req.body.authCode];
-    let data: LoginResponseType =
-      DataProviderService.getDataProviderInformation(
-        [cli, authCode],
+    let [authCode,cli] = [req.body.authCode,req.body.cli];
+    cli = '0'+cli;
+    let data =  DataProviderService.getDataProviderInformation(
+        [authCode,cli],
         GET_USER_FROM_AUTH_CODE_FUNCTION
       );
     if (data) {
+      // console.log(data);
+      // res.status(401).json(
+      //   responseNotFound({
+      //     message: "Unauthorized. User Not Found.",
+      //     statusCode: res.statusCode,
+      //   })
+      // );
       return this.generateTokenData(req, data, IVR_SOURCE, res);
-    }else{
-      res
-      .status(401)
-      .json(
+    } else {
+      res.status(401).json(
         responseNotFound({
           message: "Unauthorized. User Not Found.",
           statusCode: res.statusCode,
         })
       );
     }
-    
   }
 
   async generateTokenData(
     request: Request<LoginRequestType>,
-    userData: LoginResponseType,
+    userData: any,
     source: string,
     response: Response
   ) {
@@ -66,7 +70,6 @@ class AuthController {
 
   setInitialCacheData(userData: LoginResponseType) {
     const key = this.cacheKey;
-    
   }
 
   async generateAuthLink(req: Request<AuthGenerateRequestType>, res: Response) {
@@ -77,26 +80,21 @@ class AuthController {
     );
     if (data) {
       //success code generator response generate
-      res
-        .status(200)
-        .json(
-          responseSuccess({
-            message: "Auth Link Generated",
-            statusCode: res.statusCode,
-            data,
-          })
-        );
-    }else{
-      res
-      .status(400)
-      .json(
+      res.status(200).json(
+        responseSuccess({
+          message: "Auth Link Generated",
+          statusCode: res.statusCode,
+          data,
+        })
+      );
+    } else {
+      res.status(400).json(
         responseNotFound({
           message: "Auth Link Not Generated",
           statusCode: res.statusCode,
         })
       );
     }
-    
   }
 }
 
