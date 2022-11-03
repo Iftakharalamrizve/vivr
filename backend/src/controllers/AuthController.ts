@@ -16,25 +16,26 @@ import {
 } from "../config/constant";
 
 class AuthController {
+
   private token: any;
   private cacheKey: any;
-
+  
   async loginWithAuthCode(req: Request<LoginRequestType>, res: Response) {
     let [authCode,cli] = [req.body.authCode,req.body.cli];
     cli = '0'+cli;
-    let data =  DataProviderService.getDataProviderInformation(
+    let data = await DataProviderService.getDataProviderInformation(
         [authCode,cli],
         GET_USER_FROM_AUTH_CODE_FUNCTION
       );
+    console.log(this)
     if (data) {
-      // console.log(data);
-      // res.status(401).json(
-      //   responseNotFound({
-      //     message: "Unauthorized. User Not Found.",
-      //     statusCode: res.statusCode,
-      //   })
-      // );
-      return this.generateTokenData(req, data, IVR_SOURCE, res);
+      // await this.generateTokenData(req, data, IVR_SOURCE, res);
+      res.status(401).json(
+        responseNotFound({
+          message: "Unauthorized. User Not Found.",
+          statusCode: res.statusCode,
+        })
+      );
     } else {
       res.status(401).json(
         responseNotFound({
@@ -44,13 +45,9 @@ class AuthController {
       );
     }
   }
+ 
 
-  async generateTokenData(
-    request: Request<LoginRequestType>,
-    userData: any,
-    source: string,
-    response: Response
-  ) {
+  async generateTokenData(request: Request<LoginRequestType>,userData: any,source: string,response: Response) {
     const cli = userData.cli.slice(-10);
     userData.session_id = cli + new Date().getTime();
     const isLogged = DataLoggerService.createCustomerLogData(

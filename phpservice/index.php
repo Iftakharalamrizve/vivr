@@ -23,13 +23,12 @@ include('vivr_api_functions.php');
 $method = isset($RequestData["method"]) ? trim($RequestData["method"]) : "";
 $params = isset($RequestData["params"]) ? json_decode(trim($RequestData["params"])) : "";
 // $method = 'getVIVRData';
-// $params = ["2b808e585406","01686790963"];
+// $params = ["9b5e477c03c5","01686790963"];
 
 // $response = null;
 if(function_exists($method)){
     $response = call_user_func_array($method, $params);
 }
-
 
 die(json_encode($response));
 exit;

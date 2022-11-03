@@ -579,6 +579,7 @@ function systemRequetLimit($param = null){
    return $result;
 }
 function throttleFunction($param){
+
      //perminute request limit check
      $throttleStatus = true ;
      if(is_array($param)){
@@ -654,7 +655,7 @@ function getIVRGeneratedLink ($dialto,$dialfrom,$lang,$ivrid)
     
     $res      = 'F';
     $new_sivr = '';
-    if ( ctype_digit ( $dialto ) && ! empty( $short_link_code ) && $flag ) {
+    if ( ctype_digit ( $dialto ) && ! empty( $short_link_code ) && $flag == 1 ) {
         $res      = 'S';
         $new_sivr = $short_link_code;
     }
