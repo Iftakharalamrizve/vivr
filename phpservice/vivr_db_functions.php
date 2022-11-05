@@ -23,10 +23,12 @@ function getVIVRData ( $token , $cli )
 
     if ( $is_valid ) {
         $currentTime = date ( 'Y-m-d H:i:s' );
-        $sql         = "SELECT * FROM vivr_link WHERE token = '$token' AND cli = '$cli' AND exp_time > '$currentTime' AND status != 'Y'  LIMIT 1";
+        // $sql         = "SELECT * FROM vivr_link WHERE token = '$token' AND cli = '$cli' AND exp_time > '$currentTime' AND status != 'Y'  LIMIT 1";
+
+        $sql         = "SELECT * FROM vivr_link WHERE token = '$token' AND cli = '$cli' AND status != 'Y'  LIMIT 1";
         $result      = db_select_array ( $sql );
         if ( is_array ( $result ) ) {
-            db_update ( "UPDATE vivr_link SET status='Y' WHERE token = '$token' AND cli = '$cli' AND exp_time > '$currentTime' AND status != 'Y' LIMIT 1" );
+            // db_update ( "UPDATE vivr_link SET status='Y' WHERE token = '$token' AND cli = '$cli' AND exp_time > '$currentTime' AND status != 'Y' LIMIT 1" );
         }
     }
     $result = getArrayData ( $result );
@@ -303,6 +305,8 @@ function deletePIN ( $cli , $auth_code )
 
 function logCustomerJourney ( $cli , $module_type , $module_subtype , $log_time , $journey_id )
 {
+    
+    // 22-11-05 15:36:27 ["1686790963","VI","IO","2022-36-d 15:i:27","16867909631667662587212"]
     $is_valid = true;
 
     if ( ! preg_match ( '/^[0-9]{10}$/' , $cli ) ) { //10 length digit
@@ -315,17 +319,20 @@ function logCustomerJourney ( $cli , $module_type , $module_subtype , $log_time 
         $is_valid = false;
     }
     if ( ! strtotime ( $log_time ) ) { //datetime format
+
         $is_valid = false;
     }
+    
     if ( ! preg_match ( '/^[0-9]{20}$/' , $journey_id ) ) { //20 length digit
         $is_valid = false;
     }
-
+    
     $data = false;
-
+    
     if ( $is_valid ) {
         $sql  = "INSERT INTO log_customer_journey  SET customer_id = '$cli', module_type = '$module_type', module_sub_type = '$module_subtype',
             log_time = '$log_time' , journey_id = '$journey_id'";
+
         $data = db_update ( $sql );
     }
 
@@ -666,4 +673,15 @@ function getIVRGeneratedLink ($dialto,$dialfrom,$lang,$ivrid)
     $row[ 'url' ]    = $new_sivr;
 
     return $row;
+}
+
+function debug_log($msg)
+{
+    $currentDate = date("y-m-d").'_'.date("H");
+    $log_file = "/var/www/html/log/{$currentDate}_chat_bot.log";
+    if (!file_exists($log_file)){
+        touch($log_file);
+    }
+    file_put_contents($log_file, date("y-m-d H:i:s") . " " . json_encode($msg) . "\n", FILE_APPEND | LOCK_EX);
+    file_put_contents($log_file, "============================================================\n\n", FILE_APPEND | LOCK_EX);
 }

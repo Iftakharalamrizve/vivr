@@ -9,12 +9,13 @@ class DataLoggerService extends DataRequestService {
     public createCustomerLogData(userData:LoginResponseType,ip:string,source:string,isRegistered:boolean):boolean
     {
         const now : Date = new Date();
-        let logTime = date.format(now, 'Y-m-d H:i:s');
-        let cli:string = userData.cli;
+        let logTime = date.format(now, 'YYYY-MM-DD HH:mm:ss');
+        let cli:string = userData.cli.slice(1);
         let customerJourneyData = [cli,VIVR_MODULE_TYPE,VIVR_ONLY_MODULE_SUBTYPE,logTime,userData.session_id];
         let customerLogData = [logTime,logTime,cli,userData.did, userData.ivr_id,0,userData.session_id,userData.language,'','',source,ip,isRegistered];
         const customerJourneyResponse = this.getDataProviderInformation(customerJourneyData,STORE_CUSTOMER_JOURNEY_FUNCTION);
         const logFromWebVisitResponse = this.getDataProviderInformation(customerLogData,VIVR_LOG_FUNCTION);
+        console.trace(customerJourneyResponse,logFromWebVisitResponse)
         if(customerJourneyResponse && logFromWebVisitResponse){
             return true ;
         }

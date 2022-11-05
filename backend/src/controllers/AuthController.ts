@@ -19,7 +19,7 @@ class AuthController {
 
   private token: any;
   private cacheKey: any;
-  
+
   async loginWithAuthCode(req: Request<LoginRequestType>, res: Response) {
     let [authCode,cli] = [req.body.authCode,req.body.cli];
     cli = '0'+cli;
@@ -27,9 +27,8 @@ class AuthController {
         [authCode,cli],
         GET_USER_FROM_AUTH_CODE_FUNCTION
       );
-    console.log(this)
     if (data) {
-      // await this.generateTokenData(req, data, IVR_SOURCE, res);
+      let data1 = await this.generateTokenData(req, data[0], IVR_SOURCE, res);
       res.status(401).json(
         responseNotFound({
           message: "Unauthorized. User Not Found.",
@@ -50,12 +49,14 @@ class AuthController {
   async generateTokenData(request: Request<LoginRequestType>,userData: any,source: string,response: Response) {
     const cli = userData.cli.slice(-10);
     userData.session_id = cli + new Date().getTime();
+    userData.session_id = userData.session_id.slice(0,20)
     const isLogged = DataLoggerService.createCustomerLogData(
       userData,
       "",
       source,
       true
     );
+    console.trace(isLogged)
     if (isLogged) {
       this.token = await JwtLibraryService.createJsonWebToken(userData);
       this.cacheKey = Math.random() * (999999 - 100000) + 100000;
@@ -95,4 +96,4 @@ class AuthController {
   }
 }
 
-export default new AuthController();
+export default  new AuthController();

@@ -1,0 +1,3 @@
+22-11-05 16:22:46 "INSERT INTO log_customer_journey  SET customer_id = '1686790963', module_type = 'VI', module_sub_type = 'IO',log_time = '2022-11-05 16:22:45' , journey_id = '16867909631667665365'"
+============================================================
+

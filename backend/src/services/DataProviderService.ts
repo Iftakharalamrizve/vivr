@@ -6,7 +6,7 @@ class DataProviderService extends DataRequestService {
         this.params = JSON.stringify(data) ;
         this.method = methodName;
         await this.getResponse(true);
-        console.log(this.params,this.method)
+        console.trace(this.params,this.method,this.responseData)
         return this.responseData;
     }
 }
