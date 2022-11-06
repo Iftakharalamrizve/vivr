@@ -4,10 +4,8 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 
 class JwtLibraryService {
-    private secretKey = process.env.JWT_SECRET as string;
 
     async createJsonWebToken(userData:LoginResponseType) {
-         console.trace(this.secretKey)
          const iss = VIVR_TOKEN_ISSUER;
          const aud = VIVR_TOKEN_ISSUER;
          const iat = new Date().getTime();
@@ -18,7 +16,7 @@ class JwtLibraryService {
          const uid = await bcrypt.hash(cli + plan + iat, salt);
         return jwt.sign(
           {iss,aud,iat,nbf,cli,plan,uid},
-          this.secretKey,
+          process.env.JWT_SECRET,
           {
             expiresIn: process.env.JWT_EXPIRES_IN,
           }

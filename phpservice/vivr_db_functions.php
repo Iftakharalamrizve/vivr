@@ -341,6 +341,7 @@ function logCustomerJourney ( $cli , $module_type , $module_subtype , $log_time 
 
 function vivrLog ( $start_time , $stop_time , $cli , $did , $ivr_id , $time_in_ivr , $session_id , $language , $skill_id , $skill_status , $ice_feedback , $source , $ip , $is_registered )
 {
+    
     $is_valid = true;
     if ( ! strtotime ( $start_time ) ) { //datetime format
         $is_valid = false;

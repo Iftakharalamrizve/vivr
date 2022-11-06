@@ -50,7 +50,7 @@ class AuthController {
     const cli = userData.cli.slice(-10);
     userData.session_id = cli + new Date().getTime();
     userData.session_id = userData.session_id.slice(0,20)
-    const isLogged = DataLoggerService.createCustomerLogData(
+    const isLogged = await DataLoggerService.createCustomerLogData(
       userData,
       "",
       source,
@@ -61,6 +61,7 @@ class AuthController {
       this.token = await JwtLibraryService.createJsonWebToken(userData);
       this.cacheKey = Math.random() * (999999 - 100000) + 100000;
       if (this.token) {
+        console.log(this.token)
         this.setInitialCacheData(userData);
       }
     }

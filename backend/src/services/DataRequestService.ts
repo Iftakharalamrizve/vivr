@@ -12,6 +12,7 @@ class DataRequestService {
             method: this.method,
             params: this.params,
         };
+        console.log(requestData)
         await this.dataRequest(requestData);
     }
 
@@ -28,7 +29,7 @@ class DataRequestService {
         try {
             const response = await axios(options);
             this.responseData = response.data;
-            console.log(this.responseData)
+            //console.log(this.responseData)
         } catch (error) {
             console.log(error.message)
             this.responseData = null ;
