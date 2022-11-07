@@ -5,8 +5,8 @@ header('Content-Type: text/html; charset=utf-8');
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-error_reporting(1);
-$debug = 1;
+error_reporting(0);
+$debug = 0;
 
 $RequestData = json_decode(file_get_contents("php://input"),true);
 

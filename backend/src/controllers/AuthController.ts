@@ -52,16 +52,14 @@ class AuthController {
     userData.session_id = userData.session_id.slice(0,20)
     const isLogged = await DataLoggerService.createCustomerLogData(
       userData,
-      "",
+      "127.0.0.1",
       source,
       true
     );
-    console.trace(isLogged)
     if (isLogged) {
       this.token = await JwtLibraryService.createJsonWebToken(userData);
       this.cacheKey = Math.random() * (999999 - 100000) + 100000;
       if (this.token) {
-        console.log(this.token)
         this.setInitialCacheData(userData);
       }
     }
@@ -69,6 +67,7 @@ class AuthController {
 
   setInitialCacheData(userData: LoginResponseType) {
     const key = this.cacheKey;
+    //Redis work here 
   }
 
   async generateAuthLink(req: Request<AuthGenerateRequestType>, res: Response) {
