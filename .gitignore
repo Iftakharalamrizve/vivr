@@ -1,0 +1,6 @@
+/.idea
+/vendor
+/storage
+/public/sivr/node_modules
+/docker/database/data
+/backend/dist/

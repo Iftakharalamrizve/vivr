@@ -4900,3 +4900,118 @@ INSERT INTO `modules` VALUES ('16002389769758170236', 'CRM', 'CRM', '2020-09-16 
 INSERT INTO `modules` VALUES ('16031002896473810742', 'CHQREP', 'Cheque Book Report', '2020-10-19 15:38:09', '2020-10-19 15:38:09');
 INSERT INTO `modules` VALUES ('16032898753072028575', 'SIVR', 'SIVR', '2020-10-21 20:17:55', '2020-10-21 20:17:55');
 INSERT INTO `modules` VALUES ('16057080241583548190', 'PD', 'PD', '2020-11-18 20:00:24', '2020-11-18 20:00:24');
+
+-- ----------------------------
+-- Table structure for vivr_log
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_log`;
+CREATE TABLE `vivr_log` (
+  `start_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `stop_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cli` char(15) NOT NULL DEFAULT '',
+  `did` char(15) NOT NULL DEFAULT '',
+  `ivr_id` char(2) NOT NULL DEFAULT '',
+  `time_in_ivr` int(1) unsigned NOT NULL DEFAULT '0',
+  `session_id` char(20) NOT NULL DEFAULT '',
+  `language` char(2) NOT NULL DEFAULT '',
+  `skill_id` char(2) NOT NULL DEFAULT '',
+  `skill_status` char(1) NOT NULL DEFAULT '',
+  `source` char(1) NOT NULL DEFAULT '',
+  `ip` char(15) NOT NULL DEFAULT '',
+  `ice_feedback` char(1) DEFAULT NULL,
+  `repeated_call` char(1) NOT NULL DEFAULT '',
+  `logout_type` char(1) NOT NULL DEFAULT '',
+  `is_registered` char(1) NOT NULL DEFAULT '',
+  `ice_feedback_comment` text,
+  KEY `session_id` (`session_id`),
+  KEY `start_time` (`start_time`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for vivr_page_elements
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_page_elements`;
+CREATE TABLE `vivr_page_elements` (
+  `element_id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `page_id` char(10) NOT NULL DEFAULT '',
+  `type` varchar(20) NOT NULL DEFAULT '',
+  `display_name_bn` text CHARACTER SET utf8,
+  `display_name_en` text NOT NULL,
+  `background_color` char(7) NOT NULL DEFAULT '',
+  `text_color` char(7) NOT NULL DEFAULT '',
+  `name` text NOT NULL,
+  `value` text CHARACTER SET utf8,
+  `element_order` int(11) NOT NULL,
+  `rows` int(11) NOT NULL,
+  `columns` int(11) NOT NULL,
+  `is_visible` char(1) NOT NULL DEFAULT 'Y',
+  `data_provider_function` text NOT NULL,
+  `custom2` text NOT NULL,
+  PRIMARY KEY (`element_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- ----------------------------
+-- Table structure for vivr_page_title
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_page_title`;
+CREATE TABLE `vivr_page_title` (
+  `page_id` char(10) NOT NULL DEFAULT '',
+  `title_id` char(10) NOT NULL DEFAULT ''
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for vivr_pages
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_pages`;
+CREATE TABLE `vivr_pages` (
+  `page_id` char(10) NOT NULL DEFAULT '',
+  `parent_page_id` int(11) DEFAULT NULL,
+  `ivr_id` char(10) NOT NULL DEFAULT '',
+  `page_heading_ban` text NOT NULL,
+  `page_heading_en` text NOT NULL,
+  `task` text,
+  `has_previous_menu` char(1) NOT NULL DEFAULT 'N',
+  `has_main_menu` char(1) NOT NULL DEFAULT 'N',
+  `audio_file_ban` text,
+  `audio_file_en` text,
+  `service_title_id` char(10) DEFAULT NULL,
+  `created_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`page_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- ----------------------------
+-- Table structure for vivr_pages_of_buttons
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_pages_of_buttons`;
+CREATE TABLE `vivr_pages_of_buttons` (
+  `id` int(11) NOT NULL,
+  `button_id` int(11) NOT NULL,
+  `page_id` int(11) NOT NULL,
+  `created_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- ----------------------------
+-- Table structure for vivr_token
+-- ----------------------------
+DROP TABLE IF EXISTS `vivr_token`;
+CREATE TABLE `vivr_token` (
+  `token` char(16) NOT NULL DEFAULT '',
+  `auth_code` char(8) NOT NULL DEFAULT '',
+  `cli` char(15) NOT NULL DEFAULT '',
+  `did` char(15) NOT NULL DEFAULT '',
+  `plan` char(10) NOT NULL DEFAULT '',
+  `ivr_id` char(2) NOT NULL DEFAULT '',
+  `language` char(2) NOT NULL DEFAULT '',
+  `exp_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ip` char(15) NOT NULL DEFAULT '',
+  `session_id` char(20) NOT NULL DEFAULT '',
+  `status` char(1) NOT NULL DEFAULT '',
+  `send_status` char(1) NOT NULL DEFAULT '',
+  `service_title_id` char(10) NOT NULL DEFAULT '',
+  KEY `token` (`token`),
+  KEY `exp_time` (`exp_time`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
