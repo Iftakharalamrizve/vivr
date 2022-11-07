@@ -72,6 +72,19 @@ services:
     networks:
       - sivr-network
 
+  # Redis Service
+  cache:
+    container_name: redis-cache-server
+    image: redis:latest
+    restart: always
+    entrypoint: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD} --maxmemory ${REDIS_MEMORY_SIZE} --maxmemory-policy allkeys-lru
+    ports:
+      - '6380:6379'
+    volumes:
+      - ./docker/database/cache:/data
+    networks:
+      - sivr-network
+
 networks:
   sivr-network:
     driver: bridge

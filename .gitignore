@@ -3,4 +3,5 @@
 /storage
 /public/sivr/node_modules
 /docker/database/data
+/docker/database/cache
 /backend/dist/
