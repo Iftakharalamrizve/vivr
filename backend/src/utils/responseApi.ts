@@ -1,20 +1,4 @@
-
-type  RequestParam = {
-    message:string,
-    statusCode:number,
-    data?:object,
-    errors?:object|null
-}
-
-type ResponseParam = {
-    status:string,
-    status_code: number,
-    message:string,
-    data?:object|null,
-    error: boolean,
-    errors?:object|null
-}
-
+import { RequestParam,ResponseParam } from "@/types";
 /**
  * @desc    Common Response Style for full project
  * @author  Iftakhar Alam Rizve
@@ -29,14 +13,15 @@ type ResponseParam = {
  * @param   {string} message
  * @param   {object | array} data
  */
-const responseSuccess = (param : RequestParam) : ResponseParam => {
-    return {
+const responseSuccess = (response: any, params: RequestParam): ResponseParam => {
+    let responseInfo = {
         status:'success',
-        status_code: param.statusCode,
-        message:param.message,
-        data:param.data??null,
+        status_code: params.statusCode,
+        message:params.message,
+        data:params.data??null,
         error: false
     };
+    return sendResponse(response,responseInfo);
 };
 
 
@@ -58,13 +43,14 @@ const responseSuccess = (param : RequestParam) : ResponseParam => {
  * @param   {string} message
  * @param   {number} statusCode
  */
-const responseNotFound = (params:RequestParam) : ResponseParam =>{
-    return {
+const responseNotFound = (response: any, params: RequestParam): ResponseParam =>{
+    let responseInfo = {
         status:'error',
         status_code: params.statusCode,
         message:params.message,
         error: true
     };
+    return sendResponse(response,responseInfo);
 }
 
 
@@ -130,6 +116,10 @@ const responseWithToken = (token:string,user:object,expiration=process.env.JWT_E
         error: false,
         status_code: statusCode
     };
+}
+
+const sendResponse = (res:any,response:ResponseParam)=>{
+    return res.status(response.status_code).json(response);
 }
 
 export {responseSuccess,responseNotFound,error,validation,responseWithToken};

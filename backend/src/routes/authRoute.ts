@@ -11,6 +11,7 @@ router.get('/test',(req:any, res:any)=>{
     res.end('Hello World');
 });
 
+
 router.post(
     '/login/auth',
     AuthValidator.validateLoginRequest(),
