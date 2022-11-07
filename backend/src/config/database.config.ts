@@ -8,15 +8,16 @@ const db = new Sequelize('app', '', '', {
 	logging: false,
 });
 
+console.log(process.env.JWT_EXPIRES_IN)
 
 //redis db connection 
 const client = createClient({socket:{
-	host:process.env.REDIS_HOST,
+	host:'cache',
 	port:6379,
-	tls:true
+	password:'password'
 }});
-
-// client.on('error', (err) => console.log('Redis Client Error', err));
-// client.connect();
+client.on('connect', function() { console.log(' Redis is Connected!'); });
+client.on('error', (err:any) => console.log('Redis Client Error', err));
+client.connect();
 
 export { db, client };

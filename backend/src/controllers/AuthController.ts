@@ -45,12 +45,11 @@ class AuthController extends Controller {
     cli = '0'+cli;
     let data = await DataProviderService.getDataProviderInformation([authCode,cli],GET_USER_FROM_AUTH_CODE_FUNCTION);
     if (data) {
-      await this.generateTokenData(req, data[0], IVR_SOURCE, res);
+      await this.generateTokenData(req, data[0],IVR_SOURCE);
       responseNotFound(res,{
         message: "Unauthorized. User Not Found.",
         statusCode: 401,
       })
-
     } else {
       responseNotFound(res,{
         message: "Unauthorized. User Not Found.",
@@ -60,7 +59,7 @@ class AuthController extends Controller {
   }
  
 
-  async generateTokenData(request: Request<LoginRequestType>,userData: any,source: string,response: Response) {
+  async generateTokenData(request: Request<LoginRequestType>,userData: any,source: string) {
     const cli = userData.cli.slice(-10);
     userData.session_id = cli + new Date().getTime();
     userData.session_id = userData.session_id.slice(0,20)
