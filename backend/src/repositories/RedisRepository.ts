@@ -1,13 +1,14 @@
 import { IWrite,IRead } from "./interfaces/RedisCacheInterface";
 import { createClient} from "redis";
 import { client } from "@/config/database.config";
+import { DatabaseType, noSqlDatabaseCollectionType } from "@/types";
 
 export abstract class RedisRepository<T> implements IWrite<T>,IRead<T>{
     
-    public readonly _collection: Collection;
-    
-    constructor(){
-        
+    private _key: string;
+
+    constructor(db:DatabaseType,collectionName:string){
+        this._key = collectionName;
     }
 
     RdsCreate(key: string, item: T[]): Promise<boolean> {
