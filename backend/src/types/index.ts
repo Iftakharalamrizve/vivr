@@ -1,3 +1,6 @@
+import { createClient} from "redis";
+
+
 export type  RequestParam = {
    message:string,
    statusCode:number,
@@ -59,3 +62,5 @@ export type AuthGenerateRequestType = {
    // nbf?:string|number;
  }
 
+ export type DatabaseType  = createClient;
+ export type noSqlDatabaseCollectionType = string ;

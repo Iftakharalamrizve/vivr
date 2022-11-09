@@ -93,8 +93,8 @@
 // 		});
 // 	});
 // });
-describe("test create route", () => {
-	test("Should handle exception", async () => {
-        console.log("Hello Bangaldesh")
-    })
-});
+// describe("test create route", () => {
+// 	test("Should handle exception", async () => {
+//         console.log("Hello Bangaldesh")
+//     })
+// });

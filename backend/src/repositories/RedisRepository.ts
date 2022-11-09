@@ -1,20 +1,38 @@
 import { IWrite,IRead } from "./interfaces/RedisCacheInterface";
+import { createClient} from "redis";
+import { client } from "@/config/database.config";
 
 export abstract class RedisRepository<T> implements IWrite<T>,IRead<T>{
-
-    create(item: T): Promise<boolean> {
+    
+    public readonly _collection: Collection;
+    
+    constructor(){
         
     }
-    update(id: string, item: T): Promise<boolean> {
+
+    RdsCreate(key: string, item: T[]): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    delete(id: string): Promise<boolean> {
+
+    RdsCreateOne(key: string, item: T): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    find(item: T): Promise<T[]> {
+    RdsUpdate(key: string, item: T): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    findOne(id: string): Promise<T> {
+    RdsDelete(key: string): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    RdsDeleteOne(key: string, name: T): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    RdsFind(key: string): Promise<T[]> {
+        throw new Error("Method not implemented.");
+    }
+
+    RdsFindOne(key: string, name: T): Promise<T> {
         throw new Error("Method not implemented.");
     }
 }

@@ -1,10 +1,12 @@
 export interface IWrite<T> {
-    create(key: string, item: T): Promise<boolean>;
-    update(key: string, item: T): Promise<boolean>;
-    delete(key: string, item: T): Promise<boolean>;
+    RdsCreate(key: string, item: T[]): Promise<boolean>;
+    RdsCreateOne(key: string, item: T): Promise<boolean>;
+    RdsUpdate(key: string, item: T): Promise<boolean>;
+    RdsDelete(key: string): Promise<boolean>;
+    RdsDeleteOne(key: string, name: T): Promise<boolean>;
 }
 
 export interface IRead<T> {
-    find(key: string, item: T): Promise<T[]>;
-    findOne(key: string): Promise<T>;
+    RdsFind(key: string, item: T): Promise<T[]>;
+    RdsFindOne(key: string, name: T): Promise<T>;
 }
