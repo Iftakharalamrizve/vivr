@@ -15,7 +15,7 @@ class DataLoggerService extends DataRequestService {
         let customerLogData = [logTime,logTime,cli,userData.did, userData.ivr_id,0,userData.session_id,userData.language,'','','',source,ip,isRegistered];
         const customerJourneyResponse = await this.getDataProviderInformation(customerJourneyData,STORE_CUSTOMER_JOURNEY_FUNCTION);
         const logFromWebVisitResponse = await this.getDataProviderInformation(customerLogData,VIVR_LOG_FUNCTION);
-        console.trace([customerJourneyResponse],[logFromWebVisitResponse])
+        //console.trace([customerJourneyResponse],[logFromWebVisitResponse])
         if(customerJourneyResponse && logFromWebVisitResponse){
             return true ;
         }

@@ -101,21 +101,25 @@ const validation = (errors:object|null) : ResponseParam => {
 /**
  * @desc    Send any  Token with response
  *
- * @param   {object | array} user
+ * @param   {object | array} response
  * @param   {String} token
- * @param   {String} expiration
+ * @param   {String} key
  * @param   {number} statusCode
  */
 
-const responseWithToken = (token:string,user:object,expiration=process.env.JWT_EXPIRES_IN,statusCode:number) => {
-    return {
+const responseWithToken = (response: any, token:string, key:string, statusCode:number) => {
+
+    let responseInfo = {
+        message: 'Authentication Successfull',
         access_token:token,
-        user,
+        key: key,
         token_type:'bearer',
-        'expires_in':expiration,
+        'expires_in': process.env.JWT_EXPIRES_IN,
         error: false,
         status_code: statusCode
     };
+    return response.status(statusCode).json(responseInfo);
+    
 }
 
 const sendResponse = (res:any,response:ResponseParam)=>{

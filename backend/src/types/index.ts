@@ -63,4 +63,4 @@ export type AuthGenerateRequestType = {
  }
 
  export type DatabaseType  = createClient;
- export type noSqlDatabaseCollectionType = string ;
+ export type dtabaseCollection = string ;

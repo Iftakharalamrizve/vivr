@@ -12,7 +12,7 @@ class DataRequestService {
             method: this.method,
             params: this.params,
         };
-        console.log(requestData)
+        //console.log(requestData)
         await this.dataRequest(requestData);
     }
 
