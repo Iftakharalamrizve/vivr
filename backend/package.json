@@ -1,13 +1,15 @@
 {
 	"name": "crud-ts",
 	"version": "1.0.0",
-	"description": "SIVR",
-	"main": "index.js",
+	"description": "SIVR Servie Template",
+	"main": "dist/server.js",
 	"scripts": {
-		"dev": "ts-node-dev --respawn src/server.ts",
 		"build": "tsc",
-		"start": "node dist/src/server.js",
-		"test": "jest"
+		"dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
+		"start": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/server.js",
+		"test": "jest --detectOpenHandles",
+		"fmt": "prettier --config .prettierrc 'src/**/*.ts' --write",
+		"lint": "yarn run eslint --ext .ts src/"
 	},
 	"keywords": [],
 	"author": "",
@@ -19,12 +21,16 @@
 		"@types/supertest": "^2.0.11",
 		"@types/uuid": "^8.3.0",
 		"jest": "^27.0.6",
+		"nodemon": "^2.0.19",
 		"supertest": "^6.1.4",
 		"ts-jest": "^27.0.4",
-		"ts-node-dev": "^1.1.6",
-		"typescript": "^4.2.4"
+		"ts-node-dev": "^1.1.8",
+		"tsconfig-paths": "^4.1.0",
+		"typescript": "^4.2.4",
+		"webpack": "^5.74.0"
 	},
 	"dependencies": {
+		"@microsoft/tsdoc": "^0.14.2",
 		"@types/bcrypt": "^5.0.0",
 		"@types/cors": "^2.8.12",
 		"@types/hpp": "^0.2.2",
@@ -43,7 +49,8 @@
 		"jsonwebtoken": "^8.5.1",
 		"redis": "^4.1.0",
 		"sequelize": "^6.6.2",
-		"sqlite3": "^5.0.2",
+		"sqlite3": "^5.0.11",
+		"ts-node": "^10.9.1",
 		"util": "^0.12.4",
 		"uuid": "^8.3.2",
 		"xss": "^1.0.11",

@@ -1,3 +1,23 @@
+import { createClient} from "redis";
+
+
+export type  RequestParam = {
+   message:string,
+   statusCode:number,
+   data?:object,
+   errors?:object|null
+}
+
+export type ResponseParam = {
+   status:string,
+   status_code: number,
+   message:string,
+   data?:object|null,
+   error: boolean,
+   errors?:object|null
+}
+
+
 export type AuthGenerateRequestType = {
     cli : string ;
     channel : string;
@@ -42,3 +62,5 @@ export type AuthGenerateRequestType = {
    // nbf?:string|number;
  }
 
+ export type DatabaseType  = createClient;
+ export type dtabaseCollection = string ;

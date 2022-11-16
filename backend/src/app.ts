@@ -22,6 +22,7 @@ const limiter = rateLimit({
     windowMs: 60 * 60 * 1000,
     message: 'Too Many Request from this IP, please try again in an hour'
 });
+
 app.use('/api', limiter);
 
 // Parse the x-www-form-urlencoded request body.
@@ -40,9 +41,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //set redis server in application  
-app.set('redisClient', client);
-//call redis client 
-client;
+// app.set('redisHandler', client);
 
 // app.use("/api/v1", todoRouter);
 app.use("/api/v1", authRouter);

@@ -10,7 +10,8 @@ $debug = 0;
 
 $RequestData = json_decode(file_get_contents("php://input"),true);
 // $RequestData = $_REQUEST;
-
+die(json_encode([1,2,3,4]));
+exit;
 
 
 include('db_conf.php');
@@ -26,6 +27,8 @@ include('vivr_api_functions.php');
 $method = isset($RequestData["method"]) ? trim($RequestData["method"]) : "";
 $params = isset($RequestData["params"]) ? json_decode(trim($RequestData["params"])) : "";
 
+// $method = 'getVIVRData';
+// $params = ["aae820456d28","1686790963"];
 
 // $response = null;
 if(function_exists($method)){

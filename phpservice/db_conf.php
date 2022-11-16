@@ -11,11 +11,11 @@ global $mysqli_error;
 
 function db_conn($db_suffix = '') {
 global $g, $mysqli;
-$db_host = '198.74.96.247';
+$db_host = 'mysql';
 // $db_host = '192.168.11.53';
-$db_user = 'Rizve@123';
+$db_user = 'root';
 // $db_user = 'gplex';
-$db_pass = 'Rizve@123';
+$db_pass = 'password';
 // $db_pass = 'gplex';
 // $db = 'cc';
 $db = 'cc';
@@ -27,8 +27,6 @@ if (!$mysqli) {
 
 $mysqli->select_db($db);
 }
-db_conn();
-
 function mysql_keep_alive() {
 global $mysqli;
   if($mysqli->ping()!=1 && $mysqli->ping()!=1) {

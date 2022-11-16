@@ -1,7 +1,8 @@
 // export  export const API_URL = "http://192.168.10.70/node_l/sivr-gsl/php_data_provider/vivr_data_response.php";
-export  const API_URL = "http://localhost:8080/vivr_data_response.php";
+export  const API_URL = "http://nginx:80";
 
-export const VIVR_TOKEN_ISSUER = "vivr.web" ;
+export const REDIS_EXPIRE_TIME = 100;
+ export const VIVR_TOKEN_ISSUER = "vivr.web" ;
  export const GET_USER_TYPE_API =  "SXML:CBS-TYPE:CLI=<CLI>";
  export const GET_USER_BY_PHONE_API =  "HTTP:MWCUDEBP:CLI=<CLI>,CALLID=<CALLID>";
  export const CALL_EXTERNAL_API =  "external_api_call"; 
