@@ -1,0 +1,89 @@
+#div_tree {
+	font: 10px Verdana, sans-serif;
+	display: inline-block;
+	width: 300px;
+}
+ul.tree {
+	list-style-type: none;
+	background: url(../assets/vline.png) repeat-y;
+	margin: 0;
+	padding: 0;
+	padding-left: 7px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	cursor: default;
+	ul {
+		list-style-type: none;
+		background: url(../assets/vline.png) repeat-y;
+		margin: 0;
+		padding: 0;
+		padding-left: 7px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		cursor: default;
+		padding-left: 7px;
+	}
+	li {
+		margin: 0;
+		padding: 0 12px;
+		line-height: 22px;
+		background: url(../assets/node.png) no-repeat;
+	}
+	li.last {
+		background: #f8f8f8 url(../assets/lastnode.png) no-repeat;
+	}
+}
+li.last {
+	background-image:  url(../assets/lastnode.png);
+	background-repeat: no-repeat;
+}
+img.exp_col {
+	position: absolute;
+	margin-top: 4px;
+	margin-left: -20px;
+	vertical-align: sub;
+}
+img.exp_col_empty {
+	position: absolute;
+	margin-top: 4px;
+	margin-left: -20px;
+	vertical-align: sub;
+	width: 16px;
+}
+img.icon_tree {
+	vertical-align: middle;
+	padding-left: 3px;
+	margin-top: -3px;
+}
+a.node {
+	padding: 2px;
+}
+span.node {
+	a {
+		padding-left: 3px;
+	}
+	margin-left: -1px;
+	padding-right: 3px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+span.node_selected {
+	margin-left: -2px;
+	padding-right: 3px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background-color: #CEFFCE;
+	border: 1px solid #8AE88A;
+	border-radius: 2px;
+	a {
+		padding-left: 3px;
+	}
+}
+.commmon-visable {
+	visibility: hidden;
+}
+.commmon-showable {
+	visibility: visible;
+}
